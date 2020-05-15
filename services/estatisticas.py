@@ -1,31 +1,33 @@
-def  retornaEstatisticas(doenca):
+from db.adapter import Database
+
+
+def monta_query(campo, doenca):
+    query = "select count({0}) from caso as casos where doenca = {1} and {2} = 1".format(campo, doenca, campo)
+    return query.upper()
+
+
+def retornaEstatisticas(doenca):
+    bd = Database()
     retorno = {}
 
-    if doenca == '3':
-        retorno = {
-            "confirmados" : 99,
-            "suspeitos" : 99,
-            "descartados" : 99,
-            "curados" : 99,
-            "obitos" : 99,
-        }
+    query_conf = monta_query("confirmado", doenca)
+    query_desc = monta_query("descartado", doenca)
+    query_obito = monta_query("obito", doenca)
+    query_curado = monta_query("curado", doenca)
+    query_suspeito = monta_query("suspeito", doenca)
 
-    elif doenca == '2':
-        retorno = {
-            "confirmados" : 11,
-            "suspeitos" : 11,
-            "descartados" : 11,
-            "curados" : 11,
-            "obitos" : 11,
-        }
+    confirmados = bd.select(query_conf)
+    descartados = bd.select(query_desc)
+    obitos = bd.select(query_obito)
+    curados = bd.select(query_curado)
+    suspeitos = bd.select(query_suspeito)
 
-    elif doenca == '1':
-        retorno = {
-            "confirmados" : 26,
-            "suspeitos" : 33,
-            "descartados" : 208,
-            "curados" : 0,
-            "obitos" : 1,
-        }
+    retorno = {
+        "confirmados": confirmados[0]["CASOS"],
+        "suspeitos": suspeitos[0]["CASOS"],
+        "descartados": descartados[0]["CASOS"],
+        "curados": curados[0]["CASOS"],
+        "obitos": obitos[0]["CASOS"]
+    }
 
     return retorno

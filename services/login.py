@@ -1,17 +1,17 @@
 import uuid
 import datetime
-
 from db.adapter import Database
 
-def efetuaLogin(email, senha):
-    #trata o email
-    #email = email.lower()
 
-    #Recupera o BD
+def efetuaLogin(email, senha):
+    # trata o email
+    # email = email.lower()
+
+    # Recupera o BD
     bd = Database()
 
     registros = bd.select("select * from usuario where usuario.email = '%s'" % email)
-    if(len(registros) <= 0):
+    if len(registros) <= 0:
         return {"status": False}
 
     usuario = registros.pop()
