@@ -23,6 +23,22 @@ def login():
     return retornoApi(retorno)
 
 
+@app.route('/cadastro', methods=["POST"])
+def cadastro():
+    from services.login import cadastro
+
+    print([x for x in request.args])
+    retorno = cadastro(
+        request.args.get('nome'),
+        request.args.get('email'),
+        request.args.get('senha'),
+        request.args.get('dtNasc'),
+        request.args.get('cep'),
+    )
+
+    return retornoApi(retorno)
+
+
 @app.route('/estatistica', methods=["GET"])
 def estatisticas():
     from services.estatisticas import retornaEstatisticas

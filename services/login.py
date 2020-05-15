@@ -32,3 +32,24 @@ def efetuaLogin(email, senha):
     bd.commit()
 
     return {"status": True, "token" : token, "expiration" : horarioExpiration}
+
+
+def cadastro(nome, email, senha, dtNasc, cep):
+    db = Database()
+
+    try:
+        db.execute(
+            "INSERT INTO USUARIO (NOME, EMAIL, SENHA, DTNASC, CEP) " +
+            "VALUES ('%s', '%s', '%s', '%s', '%s') " % (nome, email, senha, dtNasc, cep)
+        )
+
+        db.commit()
+
+        return efetuaLogin(email, senha)
+
+    except:
+        return {"status": False}
+
+
+
+
