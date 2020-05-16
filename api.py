@@ -48,3 +48,22 @@ def estatisticas():
 
     retorno = retornaEstatisticas(request.args.get('doenca'))
     return retornoApi(retorno)
+
+
+@app.route('/perfil', methods=["GET, POST"])
+def perfil():
+    from services.perfil import atualiza_perfil
+
+    if not autenticaUsuario():
+        return
+
+    retorno = atualiza_perfil(
+        request.args.get('nome'),
+        request.args.get('email'),
+        request.args.get('senha'),
+        request.args.get('dtNasc'),
+        request.args.get('cep'),
+        request.args.get('token')
+    )
+
+    return retornoApi(retorno)
