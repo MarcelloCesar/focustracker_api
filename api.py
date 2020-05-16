@@ -50,7 +50,7 @@ def estatisticas():
     return retornoApi(retorno)
 
 
-@app.route('/perfil', methods=["GET, POST"])
+@app.route('/perfil', methods=["POST"])
 def perfil():
     from services.perfil import atualiza_perfil
 

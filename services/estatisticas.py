@@ -2,7 +2,7 @@ from db.adapter import Database
 
 
 def monta_query(campo, doenca):
-    query = "select count({0}) from caso as casos where doenca = {1} and {2} = 1".format(campo, doenca, campo)
+    query = "select count({0}) as casos from caso where doenca = {1} and {0} = 1".format(campo, doenca)
     return query.upper()
 
 
