@@ -50,20 +50,24 @@ def estatisticas():
     return retornoApi(retorno)
 
 
-@app.route('/perfil', methods=["POST"])
+@app.route('/perfil', methods=["POST", "GET"])
 def perfil():
-    from services.perfil import atualiza_perfil
-
+    from services.perfil import atualiza_perfil, get_perfil
+    retorno = " "
     if not autenticaUsuario():
         return
 
-    retorno = atualiza_perfil(
-        request.args.get('nome'),
-        request.args.get('email'),
-        request.args.get('senha'),
-        request.args.get('dtNasc'),
-        request.args.get('cep'),
-        request.args.get('token')
-    )
+    if request.method == "POST":
+        retorno = atualiza_perfil(
+            request.args.get('nome'),
+            request.args.get('email'),
+            request.args.get('senha'),
+            request.args.get('dtNasc'),
+            request.args.get('cep'),
+            request.args.get('token')
+        )
+
+    elif request.method == "GET":
+        retorno = get_perfil(request.args.get('token'))
 
     return retornoApi(retorno)
