@@ -71,3 +71,13 @@ def perfil():
         retorno = get_perfil(request.args.get('token'))
 
     return retornoApi(retorno)
+
+@app.route('/denuncia', methods=["POST"])
+def denuncia():
+    from services.denuncia import inclui_denuncia
+    if not autenticaUsuario():
+        return
+
+    retorno = inclui_denuncia(request.args.get('cep'), request.args.get('tipo'), request.args.get('coordenadas'),
+                              request.args.get('observacao'))
+    return retornoApi(retorno)
