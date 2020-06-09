@@ -11,14 +11,15 @@ def inclui_denuncia(cep, tipo, coordenadas, observacao):
         coordenadas = ' '
 
     db = Database()
-    query_bairro = "SELECT ID " \
+    query_bairro = "SELECT * " \
                    "FROM BAIRRO " \
-                   "WHERE BAIRRO.CEP_INICIAL >= {0} AND BAIRRO.CEP_FINAL <= {0}".format(cep)
+                   "WHERE BAIRRO.CEP_INICIAL <= '{0}' OR BAIRRO.CEP_FINAL >= '{0}'".format(cep)
+
     registros = db.select(query_bairro)
-    registros - registros.pop()
+    registros = registros.pop()
 
     query_denuncia = "INSERT INTO DENUNCIA (TIPO, BAIRRO, OBSERVACAO, COORDENADA)" \
-                     "VALUES ({0}, {1}, {2}, {3})".format(tipo, registros["ID"], observacao, coordenadas)
+                     "VALUES ({0}, {1}, '{2}', '{3}')".format(tipo, registros["ID"], observacao, coordenadas)
 
     if tipo == 1:
         doenca = 4
