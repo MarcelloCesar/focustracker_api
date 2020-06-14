@@ -5,7 +5,7 @@ from db.adapter import Database
 
 def efetuaLogin(email, senha):
     # trata o email
-    # email = email.lower()
+    email = email.lower()
 
     # Recupera o BD
     bd = Database()
@@ -37,6 +37,7 @@ def efetuaLogin(email, senha):
 def cadastro(nome, email, senha, dtNasc, cep):
     db = Database()
     data = dtNasc.split('/')
+    email = email.lower()
     dtNasc = data[2] + '-' + data[1] + '-' + data[0]
     try:
         db.execute(
