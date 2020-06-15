@@ -18,9 +18,12 @@ def autenticaUsuario():
 @app.route('/login', methods=["POST", "GET"])
 def login():
     from services.login import efetuaLogin
-    args = request.get_json(force=True)
 
-    retorno = efetuaLogin(args.get('email'), args.get('senha'))
+    retorno = ""
+    if request.method == "POST":
+        args = request.get_json(force=True)
+        retorno = efetuaLogin(args.get('email'), args.get('senha'))
+
     return retornoApi(retorno)
 
 
@@ -74,13 +77,28 @@ def perfil():
     return retornoApi(retorno)
 
 
-@app.route('/denuncia', methods=["POST"])
+@app.route('/denuncia', methods=["POST", "GET"])
 def denuncia():
-    from services.denuncia import inclui_denuncia
+    from services.denuncia import inclui_denuncia, get_denuncia
+    if not autenticaUsuario():
+        return
+    if request.method == "POST":
+        args = request.get_json(force=True)
+        retorno = inclui_denuncia(args.get('cep'), args.get('tipo'), args.get('coordenadas'), args.get('observacao'))
+
+    elif request.method == "GET":
+        retorno = get_denuncia(request.args.get('id'))
+
+    return retornoApi(retorno)
+
+
+@app.route('/gerenciamento', methods=['POST'])
+def gerencia():
+    from services.gerenciamento import atualiza_denuncia
     if not autenticaUsuario():
         return
     args = request.get_json(force=True)
-    retorno = inclui_denuncia(args.get('cep'), args.get('tipo'), args.get('coordenadas'), args.get('observacao'))
+    retorno = atualiza_denuncia(args.get('id'), args.get('tipo'))
     return retornoApi(retorno)
 
 
