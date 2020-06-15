@@ -23,11 +23,11 @@ def retornaEstatisticas(doenca):
     suspeitos = bd.select(query_suspeito)
 
     retorno = {
-        "confirmados": confirmados[0]["CASOS"],
-        "suspeitos": suspeitos[0]["CASOS"],
-        "descartados": descartados[0]["CASOS"],
-        "curados": curados[0]["CASOS"],
-        "obitos": obitos[0]["CASOS"]
+        "confirmados": confirmados[0]["casos"],
+        "suspeitos": suspeitos[0]["casos"],
+        "descartados": descartados[0]["casos"],
+        "curados": curados[0]["casos"],
+        "obitos": obitos[0]["casos"]
     }
 
     return retorno

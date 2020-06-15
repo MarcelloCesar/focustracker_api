@@ -26,6 +26,7 @@ def inclui_denuncia(cep, tipo, coordenadas, observacao):
                      "VALUES ({0}, '{1}', '{2}', '{3}', '{4}')".format(tipo, cep, observacao, coordenadas, control)
     query_procura = "SELECT ID FROM DENUNCIA WHERE CONTROL = '{0}'".format(control)
 
+
     if tipo == 1:
         doenca = 4
     elif tipo == 2:

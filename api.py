@@ -18,10 +18,12 @@ def autenticaUsuario():
 @app.route('/login', methods=["POST", "GET"])
 def login():
     from services.login import efetuaLogin
+
     retorno = ""
     if request.method == "POST":
         args = request.get_json(force=True)
         retorno = efetuaLogin(args.get('email'), args.get('senha'))
+
     return retornoApi(retorno)
 
 
