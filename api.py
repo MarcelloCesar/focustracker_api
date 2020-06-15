@@ -92,9 +92,12 @@ def denuncia():
 
 @app.route('/gerenciamento', methods=['POST'])
 def gerencia():
+    from services.gerenciamento import atualiza_denuncia
     if not autenticaUsuario():
         return
     args = request.get_json(force=True)
+    retorno = atualiza_denuncia(args.get('id'), args.get('tipo'))
+    return retornoApi(retorno)
 
 
 if __name__ == '__main__':
