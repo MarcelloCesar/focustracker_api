@@ -3,10 +3,11 @@ import uuid
 import sys
 
 
-def inclui_denuncia(cep, tipo, coordenadas, observacao):
+def inclui_denuncia(cep, tipo, coordenadas, observacao, imagem):
     cep = cep.strip()
     tipo = int(tipo)
     control = uuid.uuid4().hex
+    imagem_denuncia = imagem
 
     if observacao == '':
         observacao = ' '
@@ -22,8 +23,8 @@ def inclui_denuncia(cep, tipo, coordenadas, observacao):
     registros = db.select(query_bairro)
     registros = registros.pop()
 
-    query_denuncia = "INSERT INTO DENUNCIA (TIPO, CEP, OBSERVACAO, COORDENADA, CONTROL) " \
-                     "VALUES ({0}, '{1}', '{2}', '{3}', '{4}')".format(tipo, cep, observacao, coordenadas, control)
+    query_denuncia = "INSERT INTO DENUNCIA (TIPO, CEP, OBSERVACAO, COORDENADA, CONTROL, IMAGEM) " \
+                     "VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}')".format(tipo, cep, observacao, coordenadas, control, imagem_denuncia)
     query_procura = "SELECT ID FROM DENUNCIA WHERE CONTROL = '{0}'".format(control)
 
 
@@ -63,7 +64,8 @@ def get_denuncia(id):
         "coordenadas": registro["COORDENADA"],
         "cep": registro["CEP"],
         "observacao": registro["OBSERVACAO"],
-        "tipo": registro["TIPO"]
+        "tipo": registro["TIPO"],
+        "imagem": registro["IMAGEM"],
     }
 
     if registro["OBSERVACAO"] is None:
