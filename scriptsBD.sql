@@ -30,6 +30,8 @@ CREATE TABLE BAIRRO (
 	CEP_FINAL VARCHAR(10)
 );
 
+insert into bairro(id, nome, cep_inicial, cep_final) values (1, 'geral', '1', '99999999');
+
 CREATE TABLE CASO(
 	ID serial PRIMARY KEY,
 	DOENCA INT NOT NULL,
