@@ -57,8 +57,8 @@ def perfil():
     if not autenticaUsuario():
         return
 
-    args = request.get_json(force=True)
     if request.method == "POST":
+        args = request.get_json(force=True)
         retorno = atualiza_perfil(
             args.get('nome'),
             args.get('email'),

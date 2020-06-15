@@ -28,10 +28,10 @@ def efetuaLogin(email, senha):
     token = uuid.uuid4().hex
 
     # Salva o token do usuario
-    bd.execute("UPDATE USUARIO SET TOKEN='%s', EXPIRATION='%s' WHERE EMAIL='%s'" % ("TESTE", horarioExpiration, email))
+    bd.execute("UPDATE USUARIO SET TOKEN='%s', EXPIRATION='%s' WHERE EMAIL='%s'" % (token, horarioExpiration, email))
     bd.commit()
 
-    return {"status": True, "token" : "teste", "expiration" : horarioExpiration}
+    return {"status": True, "token" : token, "expiration" : horarioExpiration}
 
 
 def cadastro(nome, email, senha, dtNasc, cep):

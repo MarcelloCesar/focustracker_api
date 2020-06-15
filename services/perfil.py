@@ -25,16 +25,20 @@ def atualiza_perfil(nome, email, senha, dt_nasc, cep, token):
 
 def get_perfil(token):
     db = Database()
-    query = "SELECT NOME, EMAIL, DTNASC, CEP " \
+    query = "SELECT NOME, EMAIL, cast(dtnasc as varchar(100)), CEP, DIAS " \
             "FROM USUARIO " \
             "WHERE TOKEN = '{0}'".format(token)
 
     registros = db.select(query)
     registros = registros.pop()
 
+    dtnasc = registros["dtnasc"].split("-")
+    dtnasc = dtnasc[2] + '/' + dtnasc[1] + '/' + dtnasc[0]
+
     return {
         "nome": registros["nome"],
         "email": registros["email"],
-        "dtnasc": registros["dtnasc"],
-        "cep": registros["cep"]
+        "dtnasc": dtnasc,
+        "cep": registros["cep"],
+        'dias': registros["dias"]
     }
