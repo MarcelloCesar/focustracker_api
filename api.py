@@ -84,7 +84,7 @@ def denuncia():
         return
     if request.method == "POST":
         args = request.get_json(force=True)
-        retorno = inclui_denuncia(args.get('cep'), args.get('tipo'), args.get('coordenadas'), args.get('observacao'))
+        retorno = inclui_denuncia(args.get('cep'), args.get('tipo'), args.get('coordenadas'), args.get('observacao'), args.get('imagem'))
 
     elif request.method == "GET":
         retorno = get_denuncia(request.args.get('id'))
