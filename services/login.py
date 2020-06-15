@@ -17,7 +17,7 @@ def efetuaLogin(email, senha):
     usuario = registros.pop()
 
     # verifica se a senha foi informada corretamente
-    if usuario["SENHA"] != senha:
+    if usuario["senha"] != senha:
         return {"status": False}
 
 
@@ -47,7 +47,7 @@ def cadastro(nome, email, senha, dtNasc, cep):
 
         return efetuaLogin(email, senha)
 
-    except:
+    except Exception as exc:
         return {"status": False}
 
 

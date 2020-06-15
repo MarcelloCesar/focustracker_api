@@ -19,7 +19,7 @@ def inclui_denuncia(cep, tipo, coordenadas, observacao):
     registros = registros.pop()
 
     query_denuncia = "INSERT INTO DENUNCIA (TIPO, BAIRRO, OBSERVACAO, COORDENADA)" \
-                     "VALUES ({0}, {1}, '{2}', '{3}')".format(tipo, registros["ID"], observacao, coordenadas)
+                     "VALUES ({0}, {1}, '{2}', '{3}')".format(tipo, registros["id"], observacao, coordenadas)
 
     if tipo == 1:
         doenca = 4
@@ -30,7 +30,7 @@ def inclui_denuncia(cep, tipo, coordenadas, observacao):
 
     if doenca is not None:
         query_caso = "INSERT INTO CASO (DOENCA, SUSPEITO, BAIRRO) " \
-                     "VALUES ({0}, {1}, {2})".format(doenca, 1, registros["ID"])
+                     "VALUES ({0}, {1}, {2})".format(doenca, 1, registros["id"])
 
     try:
         db.execute(query_denuncia)

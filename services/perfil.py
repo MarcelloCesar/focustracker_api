@@ -33,8 +33,8 @@ def get_perfil(token):
     registros = registros.pop()
 
     return {
-        "nome": registros["NOME"],
-        "email": registros["EMAIL"],
-        "dtnasc": registros["DTNASC"],
-        "cep": registros["CEP"]
+        "nome": registros["nome"],
+        "email": registros["email"],
+        "dtnasc": registros["dtnasc"],
+        "cep": registros["cep"]
     }

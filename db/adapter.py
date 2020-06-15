@@ -8,7 +8,7 @@ class Database:
         self.db = pg.connect(
             host=Configuration.DB_HOST,
             user=Configuration.DB_USER,
-            passwd=Configuration.DB_PASS,
+            password=Configuration.DB_PASS,
             database=Configuration.DB_NAME
         )
 
